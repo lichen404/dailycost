@@ -7,7 +7,7 @@
 
             <number-panel :value.sync="record.amount" @submit="saveRecord"/>
             <types :value.sync="record.type"/>
-            <notes :value.sync="record.notes"/>
+            <notes @update:value="onUpdateNotes"/>
             <tags :data-source.sync="tags"  :value.sync="record.tags"/>
             {{recordList}}
 
@@ -60,10 +60,14 @@
             this.recordList.push(record2);
 
         }
+        onUpdateNotes(value:string){
+            this.record.notes = value;
+        }
         @Watch('recordList')
         onRecordListChange(){
             window.localStorage.setItem('recordList',JSON.stringify(this.recordList))
         }
+
 
 
 
