@@ -22,56 +22,58 @@
 
 <script lang="ts">
     import Vue from 'vue';
-    import {Component} from 'vue-property-decorator';
+    import {Component, Prop} from 'vue-property-decorator';
 
     @Component
     export default class NumberPad extends Vue {
-        output: string = '0';
+        @Prop(Number) readonly value!: number;
+        output = this.value.toString();
 
+        inputContent(event: MouseEvent) {
+            const button = (event.target as HTMLButtonElement);
+            const input = button.textContent!;
+            if (this.output.length === 16) {
+                return;
+            }
+            if (this.output === '0') {
+                if (input === '0') {
+                    return;
+                }
+                if ('123456789'.indexOf(input) >= 0) {
+                    this.output = input;
 
-        inputContent(event:MouseEvent) {
-          const button = (event.target as HTMLButtonElement);
-          const input = button.textContent!;
-          if(this.output.length===16){
-              return;
-          }
-          if(this.output==='0'){
-              if(input==='0'){
-                  return;
-              }
-              if('123456789'.indexOf(input)>=0){
-                  this.output = input;
+                } else {
+                    this.output += input;
+                }
+                return;
+            } else {
+                if (this.output.indexOf('.') >= 0 && input === '.') {
+                    return;
+                }
+                this.output += input;
 
-              }
-              else{
-                  this.output += input;
-              }
-              return;
-          }
-          else{
-              if(this.output.indexOf('.')>=0&&input==='.'){
-                  return;
-              }
-              this.output += input;
-
-          }
+            }
 
 
         }
+
         remove() {
-          if(this.output.length===1){
-              this.output = '0';
+            if (this.output.length === 1) {
+                this.output = '0';
 
-          }
-          else{
-              this.output = this.output.slice(0,-1);
-          }
+            } else {
+                this.output = this.output.slice(0, -1);
+            }
         }
-        clear(){
-            this.output= '0'
-        }
-        ok(){
 
+        clear() {
+            this.output = '0';
+        }
+
+        ok() {
+            this.$emit('update:value', parseFloat(this.output));
+            this.$emit('submit', parseFloat(this.output));
+            this.output = '0';
         }
     }
 
@@ -99,8 +101,9 @@
             > button {
                 background-color: transparent;
                 border: none;
-                $border-color:rgba(29,161,242,0.5);
-                &:active{
+                $border-color: rgba(29, 161, 242, 0.5);
+
+                &:active {
                     border: 1px solid $border-color;
                 }
 
