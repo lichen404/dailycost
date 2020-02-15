@@ -1,20 +1,18 @@
 <template>
     <div>
+        <layout>
         Labels.vue
-        <Nav/>
+        </layout>
     </div>
 </template>
 
 <script lang="ts">
-   import Nav from '@/components/Nav.vue'
+
 
     export default {
-        name:'Statistics',
-        components:{Nav}
+        name:'Labels',
+      
         
     }
 </script>
 
-<style lang="scss scoped">
-
-</style>

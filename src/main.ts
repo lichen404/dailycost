@@ -4,11 +4,16 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import Nav from '@/components/Nav.vue'
-Vue.config.productionTip = false
+import Layout from '@/components/Layout.vue'
+import Icon from '@/components/Icon.vue'
 
-Vue.component('Nav',Nav)
+Vue.config.productionTip = false;
+
+Vue.component('Nav', Nav); //全局引入组件
+Vue.component('Layout', Layout);
+Vue.component('Icon', Icon);
 new Vue({
-  router:router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+    router: router,
+    store,
+    render: h => h(App)
+}).$mount('#app');
