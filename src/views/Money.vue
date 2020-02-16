@@ -7,7 +7,7 @@
 
             <number-panel :value.sync="record.amount" @submit="saveRecord"/>
             <types :value.sync="record.type"/>
-            <notes @update:value="onUpdateNotes"/>
+            <notes field-name="备注"  placeholder="在这里输入内容" @update:value="onUpdateNotes"/>
             <tags :data-source.sync="tags" :value.sync="record.tags"/>
             {{recordList}}
 
