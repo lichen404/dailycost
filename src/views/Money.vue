@@ -8,7 +8,7 @@
             <number-panel :value.sync="record.amount" @submit="saveRecord"/>
             <types :value.sync="record.type"/>
             <notes @update:value="onUpdateNotes"/>
-            <tags :data-source.sync="tags"  :value.sync="record.tags"/>
+            <tags :data-source.sync="tags" :value.sync="record.tags"/>
             {{recordList}}
 
         </layout>
@@ -24,10 +24,12 @@
     import NumberPanel from "@/components/Money/NumberPanel.vue";
     import Notes from "@/components/Money/Notes.vue";
     import {Component, Watch} from "vue-property-decorator";
-    import model from '@/model';
+    import recordListModel from '@/models/recordListModel';
+    import tagListModel from '@/models/tagListModel';
 
     // const version = window.localStorage.getItem('version')||0;
-     const recordList = model.fetch();
+    const recordList = recordListModel.fetch();
+    tagListModel.fetch();
     //
     //     if(version==='0.0.1'){
     //         //数据迁移
@@ -45,26 +47,28 @@
         }
     })
     export default class Money extends Vue {
-        tags = ['衣', '食', '住', '行'];
+        tags = tagListModel.data;
+
         record: RecordItem = {
             tags: [], notes: '', type: '-', amount: 0
         };
-        recordList:RecordItem[]=recordList;
-        saveRecord(){
-            const record2:RecordItem= model.clone(this.record);
+        recordList: RecordItem[] = recordList;
+
+        saveRecord() {
+            const record2: RecordItem = recordListModel.clone(this.record);
             record2.createAt = new Date();
             this.recordList.push(record2);
 
         }
-        onUpdateNotes(value:string){
+
+        onUpdateNotes(value: string) {
             this.record.notes = value;
         }
+
         @Watch('recordList')
-        onRecordListChange(){
-            model.save(this.recordList)
+        onRecordListChange() {
+            recordListModel.save(this.recordList)
         }
-
-
 
 
     }
