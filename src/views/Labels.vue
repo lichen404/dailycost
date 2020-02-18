@@ -7,7 +7,7 @@
                 </router-link>
             </div>
             <div class="addTag-wrapper">
-                <Button class="addTag" @click.native="createTag">新建标签</Button>
+                <Button class="addTag" @click="createTag">新建标签</Button>
             </div>
 
         </layout>

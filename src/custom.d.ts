@@ -10,6 +10,8 @@ type TagListModel = {
     fetch: () => Tag[]
     create: (name: string) => 'success' | 'duplicated' //success表示成功  duplicated表示name重复 可以指定返回的值，只能返回这两个字符串
     save: () => void
+    update:(id:string,name:string)=>'success'|'not found'|'duplicated'
+    delete:(id:string)=>boolean
 }
 type Tag = {
     id:string;
