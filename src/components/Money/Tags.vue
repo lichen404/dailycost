@@ -2,7 +2,7 @@
     <div class="tags">
 
         <ul class="current">
-            <li v-for="tag in dataSource" :key="tag" :class="{selected:selectedTags.indexOf(tag)>=0}" @click="toggle(tag)">{{tag}}</li>
+            <li v-for="tag in dataSource" :key="tag.id" :class="{selected:selectedTags.indexOf(tag)>=0}" @click="toggle(tag)">{{tag.name}}</li>
         </ul>
         <div class="newTag">
             <button @click="create">新增标签</button>
@@ -46,6 +46,7 @@
 
 <style lang="scss" scoped>
     .tags {
+        background-color: white;
         font-size: 14px;
         padding: 16px;
         flex-grow: 1;

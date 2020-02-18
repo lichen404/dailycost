@@ -7,7 +7,7 @@
                 </router-link>
             </div>
             <div class="addTag-wrapper">
-                <button class="addTag" @click="createTag">新建标签</button>
+                <Button class="addTag" @click.native="createTag">新建标签</Button>
             </div>
 
         </layout>
@@ -18,8 +18,10 @@
     import Vue from 'vue';
     import {Component} from "vue-property-decorator";
     import tagListModel from "@/models/tagListModel";
-
-    @Component
+    import Button from "@/components/Money/Button.vue";
+    @Component({
+        components: {Button}
+    })
     export default class Labels extends Vue {
         tags = tagListModel.fetch();
         createTag(){
