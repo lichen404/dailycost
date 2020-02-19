@@ -3,7 +3,7 @@
         <layout>
             <div class="tagList">
                 <router-link :to="`/labels/edit/${tag.id}`" class="tag" v-for="tag in tags" :key="tag.id"><span>{{tag.name}}</span>
-                <Icon name="right"/>
+                    <Icon name="right"/>
                 </router-link>
             </div>
             <div class="addTag-wrapper">
@@ -17,16 +17,17 @@
 <script lang="ts">
     import Vue from 'vue';
     import {Component} from "vue-property-decorator";
-    import tagListModel from "@/models/tagListModel";
     import Button from "@/components/Money/Button.vue";
+
     @Component({
         components: {Button}
     })
     export default class Labels extends Vue {
         tags = window.tagList;
-        createTag(){
+
+        createTag() {
             const name = window.prompt('请输入标签名');
-            if(name){
+            if (name) {
                 // try {
                 //     tagListModel.create(name);
                 // }catch (e) {

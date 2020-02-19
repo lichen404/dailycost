@@ -28,7 +28,7 @@
     import FormItem from "@/components/Money/FormItem.vue";
     import {Component, Watch} from "vue-property-decorator";
     import recordListModel from '@/models/recordListModel';
-    import tagListModel from '@/models/tagListModel';
+
 
     // const version = window.localStorage.getItem('version')||0;
     const recordList = recordListModel.fetch();
