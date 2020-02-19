@@ -24,4 +24,6 @@ interface Window {
     removeTag: (id: string) => boolean;
     findTag: (id: string) => Tag | undefined;
     updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
+    recordList: RecordItem[];
+    createRecord: (record: RecordItem) => void
 }

@@ -26,12 +26,12 @@
     import Types from "@/components/Money/Types.vue";
     import NumberPanel from "@/components/Money/NumberPanel.vue";
     import FormItem from "@/components/Money/FormItem.vue";
-    import {Component, Watch} from "vue-property-decorator";
-    import recordListModel from '@/models/recordListModel';
+    import {Component} from "vue-property-decorator";
+
 
 
     // const version = window.localStorage.getItem('version')||0;
-    const recordList = recordListModel.fetch();
+    //const recordList = recordListModel.fetch();
     //tagListModel.fetch();
 
     //
@@ -58,10 +58,10 @@
         record: RecordItem = {
             tags: [], notes: '', type: '-', amount: 0
         };
-        recordList: RecordItem[] = recordList;
+        recordList: RecordItem[] = window.recordList;
 
         saveRecord() {
-          recordListModel.create(this.record);
+         window.createRecord(this.record);
 
         }
 
@@ -69,10 +69,7 @@
             this.record.notes = value;
         }
 
-        @Watch('recordList')
-        onRecordListChange() {
-            recordListModel.save()
-        }
+
 
 
     }

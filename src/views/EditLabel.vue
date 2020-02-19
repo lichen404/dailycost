@@ -72,7 +72,7 @@
 }
     .from-wrapper{
         margin-top: 8px;
-        background-color:white ;
+        background-color:white;
     }
     .button-wrapper{
         text-align: center;
