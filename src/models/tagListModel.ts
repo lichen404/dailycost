@@ -4,6 +4,7 @@ const tagListModel: TagListModel = {
     data: [],
     fetch() {
         this.data = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+        console.log(1);
         return this.data;
     },
     create(name: string) {

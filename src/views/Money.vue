@@ -32,7 +32,8 @@
 
     // const version = window.localStorage.getItem('version')||0;
     const recordList = recordListModel.fetch();
-    tagListModel.fetch();
+    //tagListModel.fetch();
+
     //
     //     if(version==='0.0.1'){
     //         //数据迁移
@@ -51,7 +52,8 @@
         }
     })
     export default class Money extends Vue {
-        tags = tagListModel.data;
+        tags = window.tagList;
+
 
         record: RecordItem = {
             tags: [], notes: '', type: '-', amount: 0
