@@ -20,6 +20,7 @@
 
     import FormItem from "@/components/Money/FormItem.vue";
     import Button from "@/components/Money/Button.vue";
+    import store from "@/store/index2";
     @Component({
         components:{Button, FormItem}
     })
@@ -29,7 +30,7 @@
             const id = this.$route.params.id;
 
 
-            const tag = window.findTag(id);
+            const tag = store.findTag(id);
             if(tag){
                 this.tag = tag;
             }else {
@@ -38,12 +39,12 @@
         }
         updateTag(name:string){
             if(this.tag){
-                window.updateTag(this.tag.id,name);
+                store.updateTag(this.tag.id,name);
             }
         }
         remove(){
             if(this.tag){
-                   window.removeTag(this.tag.id);
+                  store.removeTag(this.tag.id);
                     this.$router.back();
 
             }

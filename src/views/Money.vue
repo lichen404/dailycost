@@ -27,6 +27,7 @@
     import NumberPanel from "@/components/Money/NumberPanel.vue";
     import FormItem from "@/components/Money/FormItem.vue";
     import {Component} from "vue-property-decorator";
+    import store from '@/store/index2';
 
 
 
@@ -52,16 +53,16 @@
         }
     })
     export default class Money extends Vue {
-        tags = window.tagList;
+        tags = store.tagList;
 
 
         record: RecordItem = {
             tags: [], notes: '', type: '-', amount: 0
         };
-        recordList: RecordItem[] = window.recordList;
+        recordList: RecordItem[] = store.recordList;
 
         saveRecord() {
-         window.createRecord(this.record);
+         store.createRecord(this.record);
 
         }
 

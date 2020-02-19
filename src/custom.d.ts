@@ -17,13 +17,13 @@ type Tag = {
     id: string;
     name: string;
 }
-
-interface Window {
-    tagList: Tag[];
-    createTag: (name: string) => void;
-    removeTag: (id: string) => boolean;
-    findTag: (id: string) => Tag | undefined;
-    updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
-    recordList: RecordItem[];
-    createRecord: (record: RecordItem) => void
-}
+//
+// interface Window {
+//     tagList: Tag[];
+//     createTag: (name: string) => void;
+//     removeTag: (id: string) => boolean;
+//     findTag: (id: string) => Tag | undefined;
+//     updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated';
+//     recordList: RecordItem[];
+//     createRecord: (record: RecordItem) => void
+// }
