@@ -11,7 +11,7 @@
                 <form-item field-name="备注" placeholder="在这里输入内容" @update:value="onUpdateNotes"/>
             </div>
 
-            <tags :data-source.sync="tags" :value.sync="record.tags"/>
+            <tags/>
             {{recordList}}
 
         </layout>
@@ -27,7 +27,7 @@
     import NumberPanel from "@/components/Money/NumberPanel.vue";
     import FormItem from "@/components/Money/FormItem.vue";
     import {Component} from "vue-property-decorator";
-    import store from '@/store/index2';
+    import store from '@/store/index';
 
 
 
@@ -50,19 +50,27 @@
         components: {
             FormItem,
             Tags, Types, NumberPanel
+        },
+        computed:{
+            recordList(){
+                return store.state.recordList;
+            }
         }
     })
     export default class Money extends Vue {
-        tags = store.tagList;
 
 
         record: RecordItem = {
             tags: [], notes: '', type: '-', amount: 0
         };
-        recordList: RecordItem[] = store.recordList;
+
+        created(){
+            store.commit('fetchRecords');
+        }
+
 
         saveRecord() {
-         store.createRecord(this.record);
+         store.commit('createRecord',this.record);
 
         }
 
