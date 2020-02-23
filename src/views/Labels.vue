@@ -18,27 +18,23 @@
     import Vue from 'vue';
     import {Component} from "vue-property-decorator";
     import Button from "@/components/Money/Button.vue";
-    import store from "@/store/index2";
+    import store from "@/store/index";
+    import tagHelper from "@/mixins/createTag"
 
     @Component({
-        components: {Button}
-    })
-    export default class Labels extends Vue {
-        tags = store.tagList;
-
-        createTag() {
-            const name = window.prompt('请输入标签名');
-            if (name) {
-                // try {
-                //     tagListModel.create(name);
-                // }catch (e) {
-                //     console.log(e);
-                // }
-                store.createTag(name);
-
-
+        components: {Button},
+        mixins:[tagHelper],
+        computed: {
+            tags() {
+                return this.$store.state.tagList;
             }
         }
+    })
+    export default class Labels extends Vue {
+        beforeCreate() {
+            store.commit('fetchTags');
+        }
+
     }
 </script>
 <style lang="scss">

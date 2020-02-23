@@ -11,8 +11,8 @@
                 <form-item field-name="备注" placeholder="在这里输入内容" @update:value="onUpdateNotes"/>
             </div>
 
-            <tags/>
-            {{recordList}}
+            <tags @update:value="onUpdateTags"/>
+
 
         </layout>
     </div>
@@ -61,7 +61,7 @@
 
 
         record: RecordItem = {
-            tags: [], notes: '', type: '-', amount: 0
+            tags: [] , notes: '', type: '-', amount: 0
         };
 
         created(){
@@ -76,6 +76,9 @@
 
         onUpdateNotes(value: string) {
             this.record.notes = value;
+        }
+        onUpdateTags(value:Tag[]){
+            this.record.tags = value;
         }
 
 
