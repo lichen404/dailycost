@@ -30,7 +30,7 @@
         }
 
         created() {
-            store.commit('fetchTag');
+            store.commit('fetchTags');
             const id = this.$route.params.id;
             store.commit('setCurrentTag', id);
             if (!this.currentTag) {
