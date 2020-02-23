@@ -7,9 +7,10 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-        recordList: [] as RecordItem[],
-        tagList: [] as Tag[]
-    },
+        recordList: [],
+        tagList: [],
+        currentTag:undefined,
+    } as RootState,
     mutations: {
         fetchRecords(state) {
             state.recordList = JSON.parse(window.localStorage.getItem('recordList') || '[]') as RecordItem[];
@@ -81,8 +82,10 @@ const store = new Vuex.Store({
             window.alert('添加成功');
             return 'success'
         },
+        setCurrentTag(state,id:string){
+            state.currentTag = state.tagList.filter(t=>t.id===id)[0];
 
-    },
+    }},
 
     actions: {},
     modules: {}

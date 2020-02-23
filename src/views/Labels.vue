@@ -26,14 +26,16 @@
         mixins:[tagHelper],
         computed: {
             tags() {
-                return this.$store.state.tagList;
+                return store.state.tagList;
             }
         }
     })
     export default class Labels extends Vue {
         beforeCreate() {
-            store.commit('fetchTags');
+            this.$store.commit('fetchTags');
         }
+
+
 
     }
 </script>
