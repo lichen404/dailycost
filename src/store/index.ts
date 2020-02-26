@@ -9,8 +9,10 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         recordList: [],
+        createRecordError: null,
         tagList: [],
-        currentTag:undefined,
+        currentTag: undefined,
+        createTagError: null
     } as RootState,
     mutations: {
         fetchRecords(state) {
@@ -29,6 +31,13 @@ const store = new Vuex.Store({
         },
         fetchTags(state) {
             state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+            if (!state.tagList || state.tagList.length === 0) {
+                store.commit('createTag', '衣');
+                store.commit('createTag', '食');
+                store.commit('createTag', '住');
+                store.commit('createTag', '行');
+
+            }
         },
         saveTags(state) {
             window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
@@ -42,15 +51,13 @@ const store = new Vuex.Store({
                     break;
                 }
             }
-            if(index>=0){
+            if (index >= 0) {
                 state.tagList.splice(index, 1);
                 store.commit('saveTags');
                 router.back();
-            }else{
+            } else {
                 window.alert('删除失败');
             }
-
-
 
 
         },
@@ -58,8 +65,8 @@ const store = new Vuex.Store({
             return state.tagList.filter(t => t.id === id)[0];
 
         },
-        updateTag(state,payload:{id:string,name:string}) {
-            const {id,name} = payload;
+        updateTag(state, payload: { id: string, name: string }) {
+            const {id, name} = payload;
             const idList = state.tagList.map((item: Tag) => item.id);
             if (idList.indexOf(id) >= 0) {
                 const names = state.tagList.map((item: Tag) => item.name);
@@ -75,24 +82,23 @@ const store = new Vuex.Store({
             }
         },
         createTag(state, name) {
+            state.createTagError = null;
             const names = state.tagList.map(tag => tag.name);
             if (names.indexOf(name) >= 0) {
-                window.alert('标签名重复了');
-                return 'duplicated';
+                state.createTagError = new Error('tag name duplicated');
+                return;
             }
-            if (names.indexOf(name) >= 0) {
-                return 'duplicated';
-            }
+
             const id = createId().toString();
             state.tagList.push({id, name: name});
             store.commit('saveTags');
-            window.alert('添加成功');
-            return 'success'
-        },
-        setCurrentTag(state,id:string){
-            state.currentTag = state.tagList.filter(t=>t.id===id)[0];
 
-    }},
+        },
+        setCurrentTag(state, id: string) {
+            state.currentTag = state.tagList.filter(t => t.id === id)[0];
+
+        }
+    },
 
     actions: {},
     modules: {}

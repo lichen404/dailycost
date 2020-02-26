@@ -8,7 +8,7 @@
             <number-panel :value.sync="record.amount" @submit="saveRecord"/>
             <Tabs :data-source="recordTypeList" :value.sync="record.type"/>
             <div class="notes">
-                <form-item field-name="备注" placeholder="在这里输入内容" @update:value="onUpdateNotes"/>
+                <form-item field-name="备注" placeholder="在这里输入内容" :value.sync="record.notes"/>
             </div>
 
             <tags @update:value="onUpdateTags"/>
@@ -75,12 +75,15 @@
 
         saveRecord() {
          store.commit('createRecord',this.record);
+         if(store.state.createRecordError===null){
+             window.alert('已保存');
+         }
+
+         this.record.notes = '';
 
         }
 
-        onUpdateNotes(value: string) {
-            this.record.notes = value;
-        }
+
         onUpdateTags(value:Tag[]){
             this.record.tags = value;
         }
