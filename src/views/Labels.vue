@@ -62,12 +62,6 @@
     }
 
     .addTag {
-        background-color: #767676;
-        color: white;
-        border-radius: 4px;
-        border: none;
-        padding: 0 16px;
-        height: 40px;
 
         &-wrapper {
             text-align: center;
