@@ -61,10 +61,10 @@ const store = new Vuex.Store({
 
 
         },
-        findTag(state, id) {
-            return state.tagList.filter(t => t.id === id)[0];
-
-        },
+        // findTag(state, id) {
+        //     return state.tagList.filter(t => t.id === id)[0];
+        //
+        // },
         updateTag(state, payload: { id: string, name: string }) {
             const {id, name} = payload;
             const idList = state.tagList.map((item: Tag) => item.id);
