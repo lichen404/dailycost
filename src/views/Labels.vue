@@ -26,7 +26,7 @@
         mixins:[tagHelper],
         computed: {
             tags() {
-                return store.state.tagList;
+                return store.state.consumeTagList;
             }
         }
     })

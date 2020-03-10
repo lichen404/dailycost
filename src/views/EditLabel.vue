@@ -20,6 +20,7 @@
     import FormItem from "@/components/Money/FormItem.vue";
     import Button from "@/components/Money/Button.vue";
     import store from "@/store/index";
+    import {consumeTypeList} from "@/constant/tagTypeList";
 
     @Component({
         components: {Button, FormItem}
@@ -41,14 +42,23 @@
 
         updateTag(name: string) {
             if (this.currentTag) {
-                this.$store.commit('updateTag', {id: this.currentTag.id, name});
+                console.log(name);
+                if(consumeTypeList.indexOf(name)>=0){
+
+                    this.$store.commit('updateTag', {id: this.currentTag.id, name,iconName:name});
+                }
+                else{
+
+                    this.$store.commit('updateTag',{id:this.currentTag.id,name,iconName:'一般'});
+                }
+
             }
         }
 
         remove() {
             if (this.currentTag) {
                 store.commit('removeTag', this.currentTag.id);
-                this.$router.back();
+                this.$router.push('/labels');
 
             }
         }

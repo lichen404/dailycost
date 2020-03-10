@@ -10,7 +10,6 @@ import Icon from '@/components/Icon.vue'
 
 
 Vue.config.productionTip = false;
-
 Vue.component('Nav', Nav); //全局引入组件
 Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);

@@ -16,14 +16,16 @@ type TagListModel = {
 type Tag = {
     id: string;
     name: string;
+    iconName:string;
 }
 
 type RootState = {
     recordList: RecordItem[],
-    tagList: Tag[],
+    consumeTagList: Tag[],
     currentTag?: Tag,
     createRecordError?: Error | null,
-    createTagError?: Error | null
+    createTagError?: Error | null,
+    firstFetch:Boolean
 }
 
 

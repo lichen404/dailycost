@@ -76,7 +76,7 @@
         saveRecord() {
          store.commit('createRecord',this.record);
          if(store.state.createRecordError===null){
-             window.alert('已保存');
+            // window.alert('已保存');
          }
 
          this.record.notes = '';

@@ -2,11 +2,17 @@
     <div class="tags">
 
         <ul class="current">
-            <li v-for="tag in tagList" :key="tag.id" :class="{selected:selectedTags.indexOf(tag)>=0}" @click="toggle(tag)">{{tag.name}}</li>
+            <li v-for="tag in tagList" :key="tag.id"  @click="toggle(tag)" class="item">
+                <Icon :name="tag.iconName" :class="{selected:selectedTags.indexOf(tag)===0}"/>
+                <span>{{tag.name}}</span>
+            </li>
+            <li class="item" @click="createTag">
+                <Icon name="add"/>
+                <span>新增</span>
+            </li>
         </ul>
-        <div class="newTag">
-            <button @click="createTag">新增标签</button>
-        </div>
+
+
 
     </div>
 </template>
@@ -21,14 +27,15 @@
             mixins:[TagHelper],
             computed:{
                 tagList(){
-                    return store.state.tagList;
+                    return store.state.consumeTagList;
                 }
-            }
+            },
         }
     )
     export default class Tags extends Vue{
 
         selectedTags:Tag[] =[];
+
 
         created(){
             this.$store.commit('fetchTags');
@@ -36,11 +43,11 @@
 
         toggle(tag:Tag){
             const index = this.selectedTags.indexOf(tag);
-            if(index>=0) {
+            if(index===-1&&this.selectedTags.length===1){
                 this.selectedTags.splice(index,1);
-            }else{
-                this.selectedTags.push(tag);
+
             }
+            this.selectedTags.push(tag);
             this.$emit('update:value',this.selectedTags)
         }
 
@@ -52,10 +59,11 @@
     .tags {
         background-color: white;
         font-size: 14px;
-        padding: 16px;
+        padding: 40px 16px;
         flex-grow: 1;
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
+
 
         > .current {
             display: flex;
@@ -64,16 +72,28 @@
 
 
             > li {
-                $bg:#d9d9d9;
-                background-color:$bg;
-                border-radius: (24px/2);
-                height: 24px;
-                padding: 0 16px;
-                margin-right: 12px;
-                line-height: 24px;
-                &.selected{
-                    background-color: darken($bg,30%);
+                width: 20%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 10px;
+                .icon{
+                    $bg:#d9d9d9;
+                    height: 32px;
+                    width: 32px;
+                    border-radius:50%;
+                    border: 5px solid #fff;
+                    margin-bottom: 5px;
+                    &.selected{
+                        background-color:$bg;
+                        border-color: $bg;
+                    }
                 }
+
+
+
+
             }
         }
 
