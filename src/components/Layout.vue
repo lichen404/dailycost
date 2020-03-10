@@ -47,7 +47,9 @@
     .content {
 
         flex-grow: 1;
-        overflow: auto;
+        overflow: scroll;
+        max-height:calc(100vh - 54px);
+
     }
 
     .mask {
