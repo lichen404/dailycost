@@ -43,7 +43,7 @@
 
         toggle(tag:Tag){
             const index = this.selectedTags.indexOf(tag);
-            if(index===-1&&this.selectedTags.length===1){
+            if(this.selectedTags.length===1){
                 this.selectedTags.splice(index,1);
 
             }
@@ -59,7 +59,7 @@
     .tags {
         background-color: white;
         font-size: 14px;
-        padding: 40px 16px;
+        padding: 20px 16px 0;
         flex-grow: 1;
         display: flex;
         flex-direction: column;
