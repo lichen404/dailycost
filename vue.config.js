@@ -1,5 +1,9 @@
 const path = require('path');
 module.exports = {
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector'
+  ],
   publicPath:process.env.NODE_ENV==='production'?'/dailycost-website/':'/',
   lintOnSave: false,
   chainWebpack: config => {

@@ -1032,6 +1032,146 @@
     error-stack-parser "^2.0.0"
     string-width "^2.0.0"
 
+"@syncfusion/ej2-base@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-base/download/@syncfusion/ej2-base-17.4.51.tgz#ae8554b61dd8d7c1e3827ea76eb5f03bc5007823"
+  integrity sha1-roVUth3Y18Hjgn6nbrXwO8UAeCM=
+  dependencies:
+    "@syncfusion/ej2-icons" "~17.4.51"
+
+"@syncfusion/ej2-buttons@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-buttons/download/@syncfusion/ej2-buttons-17.4.51.tgz#b726d9a79a859e50345a92a16f63a4300dd1418a"
+  integrity sha1-tybZp5qFnlA0WpKhb2OkMA3RQYo=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+
+"@syncfusion/ej2-calendars@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-calendars/download/@syncfusion/ej2-calendars-17.4.51.tgz#1235a7f3aee7e70d5bf0e9962e02e7af809aeea1"
+  integrity sha1-EjWn867n5w1b8OmWLgLnr4Ca7qE=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-buttons" "~17.4.51"
+    "@syncfusion/ej2-inputs" "~17.4.51"
+    "@syncfusion/ej2-lists" "~17.4.51"
+    "@syncfusion/ej2-popups" "~17.4.51"
+
+"@syncfusion/ej2-charts@17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-charts/download/@syncfusion/ej2-charts-17.4.51.tgz#b690d3a90e5c380b5c37c7ba7ef4c33005c96763"
+  integrity sha1-tpDTqQ5cOAtcN8e6fvTDMAXJZ2M=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-calendars" "~17.4.51"
+    "@syncfusion/ej2-compression" "~17.4.51"
+    "@syncfusion/ej2-data" "~17.4.51"
+    "@syncfusion/ej2-file-utils" "~17.4.51"
+    "@syncfusion/ej2-navigations" "~17.4.51"
+    "@syncfusion/ej2-pdf-export" "~17.4.51"
+    "@syncfusion/ej2-svg-base" "~17.4.51"
+
+"@syncfusion/ej2-compression@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-compression/download/@syncfusion/ej2-compression-17.4.51.tgz#b07885a5b9862f5af978a311c9c22fee656e55b2"
+  integrity sha1-sHiFpbmGL1r5eKMRycIv7mVuVbI=
+  dependencies:
+    "@syncfusion/ej2-file-utils" "~17.4.51"
+
+"@syncfusion/ej2-data@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-data/download/@syncfusion/ej2-data-17.4.51.tgz#9f03cdce581ddf1d1d40ac42c8b08055be142051"
+  integrity sha1-nwPNzlgd3x0dQKxCyLCAVb4UIFE=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+
+"@syncfusion/ej2-file-utils@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-file-utils/download/@syncfusion/ej2-file-utils-17.4.51.tgz#ce0840929f6b9476f80877ec13c852559e6b5421"
+  integrity sha1-zghAkp9rlHb4CHfsE8hSVZ5rVCE=
+
+"@syncfusion/ej2-icons@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-icons/download/@syncfusion/ej2-icons-17.4.51.tgz?cache=0&sync_timestamp=1582640843027&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40syncfusion%2Fej2-icons%2Fdownload%2F%40syncfusion%2Fej2-icons-17.4.51.tgz#ea935aaba1ad690e7646e5cc13517e158fb2fed9"
+  integrity sha1-6pNaq6GtaQ52RuXME1F+FY+y/tk=
+
+"@syncfusion/ej2-inputs@~17.4.51", "@syncfusion/ej2-inputs@~17.4.55":
+  version "17.4.55"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-inputs/download/@syncfusion/ej2-inputs-17.4.55.tgz#75eb7e71376963ff5a889aaa121ebe88b8b978e3"
+  integrity sha1-det+cTdpY/9aiJqqEh6+iLi5eOM=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-buttons" "~17.4.51"
+    "@syncfusion/ej2-popups" "~17.4.51"
+    "@syncfusion/ej2-splitbuttons" "~17.4.55"
+
+"@syncfusion/ej2-lists@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-lists/download/@syncfusion/ej2-lists-17.4.51.tgz#7b6d9be845352754206cae052db5300e99a33850"
+  integrity sha1-e22b6EU1J1QgbK4FLbUwDpmjOFA=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-buttons" "~17.4.51"
+    "@syncfusion/ej2-data" "~17.4.51"
+
+"@syncfusion/ej2-navigations@~17.4.51":
+  version "17.4.55"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-navigations/download/@syncfusion/ej2-navigations-17.4.55.tgz#ae8c7a66a010fe7c7c18bcf16e09201ee31774d4"
+  integrity sha1-rox6ZqAQ/nx8GLzxbgkgHuMXdNQ=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-buttons" "~17.4.51"
+    "@syncfusion/ej2-data" "~17.4.51"
+    "@syncfusion/ej2-inputs" "~17.4.55"
+    "@syncfusion/ej2-lists" "~17.4.51"
+    "@syncfusion/ej2-popups" "~17.4.51"
+
+"@syncfusion/ej2-pdf-export@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-pdf-export/download/@syncfusion/ej2-pdf-export-17.4.51.tgz#0cc7accb9f3c01fcf31e813f178c0a3ffe91256e"
+  integrity sha1-DMesy588AfzzHoE/F4wKP/6RJW4=
+  dependencies:
+    "@syncfusion/ej2-compression" "~17.4.51"
+
+"@syncfusion/ej2-popups@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-popups/download/@syncfusion/ej2-popups-17.4.51.tgz#5e8548d9b6b5d0c1446b40ad59ce76b19ab7e76c"
+  integrity sha1-XoVI2ba10MFEa0CtWc52sZq352w=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-buttons" "~17.4.51"
+
+"@syncfusion/ej2-splitbuttons@~17.4.55":
+  version "17.4.55"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-splitbuttons/download/@syncfusion/ej2-splitbuttons-17.4.55.tgz#d4405446c0b61eaad6a5d4644e6f1474f18bb623"
+  integrity sha1-1EBURsC2HqrWpdRkTm8UdPGLtiM=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-popups" "~17.4.51"
+
+"@syncfusion/ej2-svg-base@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-svg-base/download/@syncfusion/ej2-svg-base-17.4.51.tgz#9d80fe0cf0a67c72edab4119bd683061afaa7241"
+  integrity sha1-nYD+DPCmfHLtq0EZvWgwYa+qckE=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+
+"@syncfusion/ej2-vue-base@~17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-vue-base/download/@syncfusion/ej2-vue-base-17.4.51.tgz#e732bdb2fb63b10463decf91ada13b81ebd36e27"
+  integrity sha1-5zK9svtjsQRj3s+RraE7gevTbic=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+
+"@syncfusion/ej2-vue-charts@^17.4.51":
+  version "17.4.51"
+  resolved "https://registry.npm.taobao.org/@syncfusion/ej2-vue-charts/download/@syncfusion/ej2-vue-charts-17.4.51.tgz#e6a627179858a74057d06126ce48de26df542d7b"
+  integrity sha1-5qYnF5hYp0BX0GEmzkjeJt9ULXs=
+  dependencies:
+    "@syncfusion/ej2-base" "~17.4.51"
+    "@syncfusion/ej2-charts" "17.4.51"
+    "@syncfusion/ej2-vue-base" "~17.4.51"
+
 "@types/babel__core@^7.1.0":
   version "7.1.3"
   resolved "https://registry.npm.taobao.org/@types/babel__core/download/@types/babel__core-7.1.3.tgz#e441ea7df63cd080dfcd02ab199e6d16a735fc30"
@@ -1988,13 +2128,6 @@ aws4@^1.8.0:
   version "1.9.1"
   resolved "https://registry.npm.taobao.org/aws4/download/aws4-1.9.1.tgz?cache=0&sync_timestamp=1578958189607&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faws4%2Fdownload%2Faws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
   integrity sha1-fjPY99RJs/ZzzXLeuavcVS2+Uo4=
-
-axios@^0.19.2:
-  version "0.19.2"
-  resolved "https://registry.npm.taobao.org/axios/download/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
-  integrity sha1-PqNsXYgY0NX4qKl6bTa4bNwAyyc=
-  dependencies:
-    follow-redirects "1.5.10"
 
 babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
   version "6.26.0"
@@ -3424,13 +3557,6 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8:
   dependencies:
     ms "2.0.0"
 
-debug@=3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npm.taobao.org/debug/download/debug-3.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdebug%2Fdownload%2Fdebug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
-  integrity sha1-W7WgZyYotkFJVmuhaBnmFRjGcmE=
-  dependencies:
-    ms "2.0.0"
-
 debug@^3.0.0, debug@^3.1.1, debug@^3.2.5:
   version "3.2.6"
   resolved "https://registry.npm.taobao.org/debug/download/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
@@ -3777,6 +3903,13 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
+
+echarts@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npm.taobao.org/echarts/download/echarts-4.6.0.tgz#b5a47a1046cec93ceeef954f9ee54751340558ec"
+  integrity sha1-taR6EEbOyTzu75VPnuVHUTQFWOw=
+  dependencies:
+    zrender "4.2.0"
 
 editorconfig@^0.15.3:
   version "0.15.3"
@@ -4506,13 +4639,6 @@ flush-write-stream@^1.0.0:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
-
-follow-redirects@1.5.10:
-  version "1.5.10"
-  resolved "https://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
-  integrity sha1-e3qfmuov3/NnhqlP9kPtB/T/Xio=
-  dependencies:
-    debug "=3.1.0"
 
 follow-redirects@^1.0.0:
   version "1.10.0"
@@ -8633,6 +8759,11 @@ requires-port@^1.0.0:
   resolved "https://registry.npm.taobao.org/requires-port/download/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
 
+resize-detector@^0.1.10:
+  version "0.1.10"
+  resolved "https://registry.npm.taobao.org/resize-detector/download/resize-detector-0.1.10.tgz#1da3f961aa5f914ccbcfd3752d52fd45beeb692c"
+  integrity sha1-HaP5YapfkUzLz9N1LVL9Rb7raSw=
+
 resolve-cwd@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/resolve-cwd/download/resolve-cwd-2.0.0.tgz#00a9f7387556e27038eae232caa372a6a59b665a"
@@ -10195,6 +10326,15 @@ vue-class-component@^7.0.2, vue-class-component@^7.1.0:
   resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.2.tgz#aecc6d28801f64c61eb04407cf3a5476da26b0c0"
   integrity sha1-rsxtKIAfZMYesEQHzzpUdtomsMA=
 
+vue-echarts@^5.0.0-beta.0:
+  version "5.0.0-beta.0"
+  resolved "https://registry.npm.taobao.org/vue-echarts/download/vue-echarts-5.0.0-beta.0.tgz#438dd4b0fc5ccea281709c1f7c6321b05352bdf4"
+  integrity sha1-Q43UsPxczqKBcJwffGMhsFNSvfQ=
+  dependencies:
+    core-js "^3.4.4"
+    lodash "^4.17.15"
+    resize-detector "^0.1.10"
+
 vue-eslint-parser@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-5.0.0.tgz#00f4e4da94ec974b821a26ff0ed0f7a78402b8a1"
@@ -10879,3 +11019,8 @@ yorkie@^2.0.0:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
+
+zrender@4.2.0:
+  version "4.2.0"
+  resolved "https://registry.npm.taobao.org/zrender/download/zrender-4.2.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fzrender%2Fdownload%2Fzrender-4.2.0.tgz#d001302e155f28de1f9fc7fcd5c254bad28471cf"
+  integrity sha1-0AEwLhVfKN4fn8f81cJUutKEcc8=

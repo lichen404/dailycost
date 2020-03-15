@@ -1,106 +1,232 @@
 <template>
-    <div>
-        <layout>
-            <!--            <Types :value.sync="value" class-prefix="xxx"/>-->
-            <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type"/>
+    <layout>
+        <TopNav>本月支出统计</TopNav>
+        <div >
+            <div class="title">每日支出</div>
+            <v-chart    class="v-chart"  :options="bar" ></v-chart>
 
-            <!--            <Tabs :data-source="intervalList" :value.sync="interval" class-prefix="interval"/>-->
-            <ol>
-                <li v-for="(group,index) in result" :key="index">
-                    <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
-                    <ol>
-                        <li v-for="item in group.items" :key="item.id" class="record">
-                            <span>{{tagString(item.tags)}}</span>
-                            <span class="note">{{item.notes}}</span>
-                            <span>￥{{item.amount}} </span>
-                        </li>
-                    </ol>
-                </li>
-            </ol>
-            <div class="tips" v-if="result.length===0">
-                <Icon name="not-found"/>
-                <span class="word">您还没有添加相关记录</span></div>
-        </layout>
-
-    </div>
+        </div>
+        <div>
+            <div class="title">支出类型占比</div>
+            <v-chart  class="v-chart"  :options="pie" ></v-chart>
+        </div>
+    </layout>
 </template>
 
-<script lang="ts">
-
-    import Vue from 'vue';
-    import {Component} from 'vue-property-decorator'
-    import Tabs from "@/components/Tabs.vue";
-    import intervalList from "@/constant/intervalList";
-    import recordTypeList from "@/constant/recordTypeList";
-    import store from "@/store";
+<script lang="js">
+    import ECharts from 'vue-echarts';
     import dayjs from "dayjs";
-
-    const api = dayjs();
-    @Component({
-        components: {Tabs}
-    })
-    export default class Statistics extends Vue {
-        interval = 'day';
-        type = '-';
-        intervalList = intervalList;
-        recordTypeList = recordTypeList;
-
+    import 'echarts/lib/chart/pie'
+    import 'echarts/lib/chart/bar'
+    import clone from "@/lib/clone";
+    import TopNav from "@/components/TopNav";
+    export default {
+        components:{
+            TopNav,
+            'v-chart':ECharts
+        },
         beforeCreate() {
-            store.commit('fetchRecords');
+            this.$store.commit('fetchRecords');
+        },
+        beforeMount() {
+            if(this.$store.state.recordList.length===0){
+                window.alert('还没有内容，先去记一笔账吧');
+                this.$router.push("/money")
+            }
 
-        }
+        },
+        data(){
+            return{
+
+                bar: {
+                    grid: {
+                        x: 15,
+                        y: 40,
+                        x2: 20,
+                        y2: 30,
+                        borderWidth: 1
+                    },
+
+                    xAxis: {
+
+                        type: 'category',
+                        data: this.days('day'),
+                        splitLine: {
+                            show: true,
+                            lineStyle: {
+                                color: ['#F5F4F9'],
+                            }
+                        },
+
+                        axisLine: {//坐标线
+
+                            lineStyle: {
+                                type: 'solid',
+                                color: '#F5F4F9',//轴线的颜色
+                                width: '1',//坐标线的宽度
+                            }
+                        },
+                        axisTick: {//刻度
+
+                            show: false//不显示刻度线
+                        },
+                        axisLabel: {
+                            interval: 0,
+                            textStyle: {
+                                color: '#000',//坐标值的具体的颜色
+                                fontSize: 8,
+                            }
+                        },
+
+                    },
+                    yAxis: {
+                        splitLine: {show: false},
+                        axisLine: {//线
+                            show: false
+                        },
+                        axisTick: {//刻度
+                            show: false
+                        },
+                        axisLabel: {
+                            show: false
+                        },
+                    },
+                    series: [
+                        {
+                            type: "bar",
+                            data: this.days('amounts','-'),
 
 
-        tagString(tags: Tag[]) {
-            return tags.length === 0 ? '无' : tags.map(tag => tag.name).join(',');
-        }
+                            itemStyle: {
+                                normal: {
+                                    barBorderRadius: [20, 10, 0, 0],
+                                    color: '#FD6B71',//设置柱子颜色
+                                    label: {
+                                        show: true,//柱子上显示值
+                                        position: 'top',//值在柱子上方显示
+                                        textStyle: {
+                                            color: '#FD6B71',//值得颜色
 
-        beautify(string: string) {
-            const now = dayjs();
-            const api = dayjs(string);
-            if (api.isSame(now, 'day')) {
-                return '今天';
+                                        }
+                                    }
+                                }
+                            },
+                            barWidth: 5//设置柱子宽度，单位为px
+                        }
+                    ],
+                },
 
-            } else if (api.isSame(now.subtract(1, 'day'), 'day')) {
-                return '昨天';
-            } else {
-                if (api.isSame(now, 'year')) {
-                    return now.format('M月D日');
+                pie: {
+
+                    series: [
+                        {
+
+                            type: 'pie',//图形类型，如饼状图，柱状图等
+                            radius: ['35%', '65%'],//饼图的半径，数组的第一项是内半径，第二项是外半径。支持百分比，本例设置成环形图。具体可以看文档或改变其值试一试
+                            //roseType:'area',是否显示成南丁格尔图，默认false
+                            itemStyle: {
+                                normal:{
+                                    label:{
+                                        show:true,
+                                        textStyle:{color:'#3c4858',fontSize:"12"},
+                                        formatter:function(val){   //让series 中的文字进行换行
+                                            return val.name.split("-").join("\n");}
+                                    },//饼图图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。可以与itemStyle属性同级，具体看文档
+                                    labelLine:{
+                                        show:true,
+                                        lineStyle:{color:'#3c4858'}
+                                    }//线条颜色
+                                },//基本样式
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)',//鼠标放在区域边框颜色
+                                    textColor:'#000'
+                                }//鼠标放在各个区域的样式
+                            },
+                            data:
+                                this.pieData('-')
+                            ,//数据，数据中其他属性，查阅文档
+                            color: ['#C0504D','#F79646','#772C2A','#B65708','#CD7371','#F9AB6B','#9F3B38','#F3740B','#D99694','#8064A2'],//各个区域颜色
+                        },//数组中一个{}元素，一个图，以此可以做出环形图
+                    ],//系列列表
+                },
+
+            }
+        },
+        methods:{
+            pieData(type){
+                const amount=this.billDetail('amount',type);
+
+
+                const typeList=[];
+                const result =[];
+                const recordList = this.$store.state.recordList;
+                const newList=clone(recordList).filter(r=>r.type===type);
+                for(let i=0;i<newList.length;i++) {
+
+                    typeList.push(newList.filter(item=>item.tags[0].name===newList[i].tags[0].name))
                 }
-                return now.format('YYYY年M月D日');
-            }
 
+                for(let val of typeList){
 
-        }
-
-        get recordList() {
-            return store.state.recordList;
-        }
-
-        get result() {
-            type HashTableValue = { title: string,total?:number, items: RecordItem[] };
-            const {recordList} = this;
-            const recordListWithType = recordList.filter(r => r.type === this.type).sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
-            if (recordListWithType.length === 0) {
-                return [];
-            }
-            const groupedList: HashTableValue[] = [{
-                title: dayjs(recordListWithType[0].createAt).format('YYYY-MM-DD'),
-                items: [recordListWithType[0]]
-            }];
-            for (let i = 1; i < recordListWithType.length; i++) {
-                const current = recordListWithType[i];
-                const last = groupedList[groupedList.length - 1];
-                if (dayjs(last.title).isSame(dayjs(current.createAt), 'day')) {
-                    last.items.push(current);
+                    let num = (val.reduce((x,y)=>x+y.amount,0)/amount*100).toFixed(2);
+                    let strNum = num.toString() + '%';
+                    result.push({name:val[0].tags[0].name+'-'+ strNum,value:(num/amount*100).toFixed(2)});
+                }
+                console.log(result);
+                return result;
+            },
+            billDetail(name,type){
+                let amount=0;
+                let count =0;
+                const now = dayjs();
+                const recordList = this.$store.state.recordList;
+                const newList=clone(recordList).filter(r=>r.type===type);
+                for(let i=0;i<newList.length;i++){
+                    if(now.isSame(dayjs(newList[i].createAt),'month')){
+                        amount+=newList[i].amount;
+                        count+=1;
+                    }
+                }
+                if (name==='amount'){  return amount;}
+                if(name==='count'){    return count;}
+            },
+            getDays() {
+                const [year, month] = [dayjs().year(), dayjs().month()];
+                const d = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                if ((year % 4 === 0 && year % 100 !== 0) || (year % 100 === 0 && year % 400 === 0)) {
+                    if (month === 1) {
+                        return 29;
+                    } else {
+                        return d[month];
+                    }
                 } else {
-                    groupedList.push({title: dayjs(current.createAt).format('YYYY-MM-DD'), items: [current]});
+                    return d[month];
                 }
-            }
-            groupedList.forEach(group=>{
-                group.total = group.items.reduce((sum,item)=>sum + item.amount,0);
-            });
-            return groupedList;
+            },
+            days(name,type){
+                const day=[];
+                const days=this.getDays();
+                const amounts=[];
+                let amount=null;
+                for(let i=1;i<=days;i++){
+                    const date =dayjs().date(i);
+                    for (let j=0;j<this.$store.state.recordList.length;j++){
+                        if(dayjs(this.$store.state.recordList[j].createAt).isSame(date,'day')){
+                            if(this.$store.state.recordList[j].type===type){amount+=this.$store.state.recordList[j].amount;}
+
+                        }
+                    }
+                    day.push(i);
+                    amounts.push(amount);
+                    amount=null;
+                }
+
+                if(name==='day'){
+                    return day;}
+                if(name==='amounts'){ return amounts;}
+            },
         }
 
 
@@ -108,64 +234,16 @@
 </script>
 
 <style lang="scss" scoped>
-    %item {
-        padding: 8px 16px;
-        line-height: 24px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    .v-chart{
+        background: #FFFFFF;
+        width: 100%;
+        height: 250px;
+        margin-top: 10px;
+
 
     }
-
-    .title {
-        @extend %item;
+    .title{
+        margin-top: 10px;
+        text-align: center;
     }
-
-    .record {
-        background-color: white;
-        @extend %item;
-    }
-
-    .tips {
-        margin-top: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        >.icon{
-            height: 64px;
-            width: 64px;
-        }
-        >.word{
-            padding-top: 15px;
-        }
-
-    }
-
-    .note {
-        margin-right: auto;
-        margin-left: 16px;
-        color: #999;
-
-    }
-
-    ::v-deep {
-        .type-tabs-item {
-            background-color: #c4c4c4;
-
-            &.selected {
-                background-color: white;
-
-                &::after {
-                    display: none;
-                }
-            }
-
-        }
-
-        .interval-tabs-item {
-            height: 48px;
-        }
-    }
-
 </style>
