@@ -172,9 +172,9 @@
 
                     let num = (val.reduce((x,y)=>x+y.amount,0)/amount*100).toFixed(2);
                     let strNum = num.toString() + '%';
-                    result.push({name:val[0].tags[0].name+'-'+ strNum,value:(num/amount*100).toFixed(2)});
+                    result.push({name:val[0].tags[0].name+'-'+ strNum,value:num});
                 }
-                console.log(result);
+
                 return result;
             },
             billDetail(name,type){
