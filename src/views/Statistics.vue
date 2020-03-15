@@ -164,8 +164,11 @@
                 const recordList = this.$store.state.recordList;
                 const newList=clone(recordList).filter(r=>r.type===type);
                 for(let i=0;i<newList.length;i++) {
+                    let current = newList.filter(item=>item.tags[0].name===newList[i].tags[0].name);
+                    if(!typeList.find((i)=>JSON.stringify(i)===JSON.stringify(current))){
+                        typeList.push(newList.filter(item=>item.tags[0].name===newList[i].tags[0].name))
+                    }
 
-                    typeList.push(newList.filter(item=>item.tags[0].name===newList[i].tags[0].name))
                 }
 
                 for(let val of typeList){
@@ -174,6 +177,7 @@
                     let strNum = num.toString() + '%';
                     result.push({name:val[0].tags[0].name+'-'+ strNum,value:num});
                 }
+
 
                 return result;
             },
