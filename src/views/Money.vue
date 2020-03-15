@@ -75,6 +75,9 @@
 
         saveRecord() {
             if(this.record.tags.length>=1){
+                if(this.record.amount===0){
+                    return;
+                }
                 store.commit('createRecord',this.record);
                 if(store.state.createRecordError===null){
                     // window.alert('已保存');
