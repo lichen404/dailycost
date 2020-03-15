@@ -40,7 +40,7 @@
         type = '-';
 
         get recordList() {
-            return this.$store.state.recordList.filter((i:RecordItem)=>i.type===this.type);
+            return this.$store.state. recordList.filter((r:RecordItem) => r.type === this.type).sort((a,b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
         }
 
         currentRecord?: RecordItem;
