@@ -76,7 +76,7 @@ const store = new Vuex.Store({
             }
             if (index >= 0) {
                 state.consumeTagList.splice(index, 1);
-                store.commit('saveTags');
+                store.commit('saveTags','consume');
                 router.back();
             } else {
                 window.alert('删除失败');
@@ -99,7 +99,9 @@ const store = new Vuex.Store({
                     const tag = state.consumeTagList.filter((item: Tag) => item.id === id)[0];
                     tag.name = name;
                     tag.iconName =iconName;
-                    store.commit('saveTags');
+                    console.log(tag);
+                    console.log(state.consumeTagList);
+                    store.commit('saveTags','consume');
 
 
                 }
