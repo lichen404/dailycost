@@ -22,10 +22,11 @@ type Tag = {
 type RootState = {
     recordList: RecordItem[],
     consumeTagList: Tag[],
+    incomeTagList:Tag[],
     currentTag?: Tag,
     createRecordError?: Error | null,
     createTagError?: Error | null,
-    firstFetch:Boolean
+
 }
 
 

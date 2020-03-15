@@ -15,11 +15,11 @@ export class TagHelper extends Vue {
         else{
             if(consumeTypeList.indexOf(name)>=0){
                 //this.$emit('add',name) // 不要直接修改外部参数
-                store.commit('createTag',{name,iconName:name});
+                store.commit('createTag',{name,iconName:name,type:'consume'});
 
             }
             else {
-                store.commit('createTag',{name,iconName:'一般'});
+                store.commit('createTag',{name,iconName:'一般',type:'consume'});
             }
             if (store.state.createTagError && store.state.createTagError.message === 'tag name duplicated') {
                 window.alert('标签名重复了');

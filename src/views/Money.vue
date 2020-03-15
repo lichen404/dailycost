@@ -11,7 +11,7 @@
                 <form-item field-name="备注" placeholder="在这里输入内容" :value.sync="record.notes"/>
             </div>
 
-            <tags @update:value="onUpdateTags"/>
+            <tags @update:value="onUpdateTags" :value="record.type"/>
 
 
         </layout>
@@ -74,12 +74,18 @@
 
 
         saveRecord() {
-         store.commit('createRecord',this.record);
-         if(store.state.createRecordError===null){
-            // window.alert('已保存');
-         }
+            if(this.record.tags.length>=1){
+                store.commit('createRecord',this.record);
+                if(store.state.createRecordError===null){
+                    // window.alert('已保存');
+                }
 
-         this.record.notes = '';
+                this.record.notes = '';
+            }
+            else {
+                window.alert('请先选择一个标签');
+            }
+
 
         }
 

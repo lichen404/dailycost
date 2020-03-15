@@ -10,9 +10,12 @@
       标签
       </router-link>
       
+      <router-link to="/bill" class="item" active-class="selected">
+      <Icon name="bill"/>
+      账单</router-link>
       <router-link to="/statistics" class="item" active-class="selected">
-      <Icon name="statistics"/>
-      统计</router-link>
+            <Icon name="statistics"/>
+            统计</router-link>
     </nav>
 </template>
 
@@ -33,7 +36,7 @@ nav{
     
     >.item{
         padding: 2px 0;
-        width:33.33333%;
+        width:25%;
         display: flex;
         justify-content: center;
         align-items: center;

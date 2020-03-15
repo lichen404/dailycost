@@ -1,9 +1,6 @@
 <template>
     <layout>
-        <div class="navBar">
-            <Icon class="leftIcon" name="left" @click.native="goBack"/>
-            <span class="title">编辑标签</span>
-        </div>
+        <TopNav>编辑标签</TopNav>
         <div class="from-wrapper">
             <form-item :value="currentTag.name" @update:value="updateTag" field-name="标签名" placeholder="请输入标签名"/>
         </div>
@@ -21,9 +18,10 @@
     import Button from "@/components/Money/Button.vue";
     import store from "@/store/index";
     import {consumeTypeList} from "@/constant/tagTypeList";
+    import TopNav from "@/components/TopNav.vue";
 
     @Component({
-        components: {Button, FormItem}
+        components: {TopNav, Button, FormItem}
     })
     export default class EditLabel extends Vue {
         get currentTag() {
@@ -63,28 +61,13 @@
             }
         }
 
-        goBack() {
-            this.$router.back();
-        }
+
 
     }
 </script>
 
 <style lang="scss" scoped>
-    .navBar {
-        text-align: center;
-        font-size: 16px;
-        padding: 12px 16px;
-        background-color: white;
-        position: relative;
 
-        > .leftIcon {
-            position: absolute;
-            left: 16px;
-            top: 16px;
-
-        }
-    }
 
     .from-wrapper {
         margin-top: 8px;

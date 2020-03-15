@@ -1,14 +1,20 @@
 <template>
     <div class="tags">
 
-        <ul class="current">
-            <li v-for="tag in tagList" :key="tag.id"  @click="toggle(tag)" class="item">
+        <ul class="current" v-if="value==='-'">
+            <li v-for="tag in consumeTagList" :key="tag.id"  @click="toggle(tag)" class="item">
                 <Icon :name="tag.iconName" :class="{selected:selectedTags.indexOf(tag)===0}"/>
                 <span>{{tag.name}}</span>
             </li>
             <li class="item" @click="createTag">
                 <Icon name="add"/>
                 <span>新增</span>
+            </li>
+        </ul>
+        <ul class="current" v-else>
+            <li v-for="tag in incomeTagList" :key="tag.id"  @click="toggle(tag)" class="item">
+                <Icon :name="tag.iconName" :class="{selected:selectedTags.indexOf(tag)===0}"/>
+                <span>{{tag.name}}</span>
             </li>
         </ul>
 
@@ -19,27 +25,35 @@
 
 <script lang="ts">
     import Vue from "vue";
-    import {Component} from "vue-property-decorator";
+    import {Component, Prop, Watch} from "vue-property-decorator";
     import store from '@/store/index';
     import TagHelper from "@/mixins/createTag";
     @Component(
         {
             mixins:[TagHelper],
             computed:{
-                tagList(){
+                consumeTagList(){
                     return store.state.consumeTagList;
+                },
+                incomeTagList(){
+                    return store.state.incomeTagList;
                 }
             },
         }
     )
     export default class Tags extends Vue{
+        @Prop(String) readonly value!:string;
 
         selectedTags:Tag[] =[];
 
 
         created(){
-            this.$store.commit('fetchTags');
+
+            this.$store.commit('fetchTags','consume');
+            this.$store.commit('fetchTags','income');
+
         }
+
 
         toggle(tag:Tag){
             const index = this.selectedTags.indexOf(tag);

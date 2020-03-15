@@ -12,9 +12,10 @@ const store = new Vuex.Store({
         recordList: [],
         createRecordError: null,
         consumeTagList: [],
+        incomeTagList:[],
         currentTag: undefined,
         createTagError: null,
-        firstFetch:true
+
     } as RootState,
     mutations: {
         fetchRecords(state) {
@@ -31,22 +32,38 @@ const store = new Vuex.Store({
         saveRecords(state) {
             window.localStorage.setItem('recordList', JSON.stringify(state.recordList));
         },
-        fetchTags(state) {
-            if(state.firstFetch){
+        fetchTags(state,type) {
+            if (type === 'consume') {
+
                 state.consumeTagList = JSON.parse(window.localStorage.getItem('consumeTagList') || '[]');
                 if (!state.consumeTagList || state.consumeTagList.length === 0) {
-                    for(let i=0;i<consumeTypeList.length;i++){
-                        store.commit('createTag',{name:consumeTypeList[i],iconName:consumeTypeList[i]});
+                    for (let i = 0; i < consumeTypeList.length; i++) {
+                        store.commit('createTag', {name: consumeTypeList[i], iconName: consumeTypeList[i],type});
                     }
 
 
                 }
+            } else {
+
+                    state.incomeTagList = JSON.parse(window.localStorage.getItem('incomeTagList') || '[]');
+                    if (!state.incomeTagList || state.incomeTagList.length === 0) {
+                        for (let i = 0; i < incomeTypeList.length; i++) {
+                            store.commit('createTag', {name: incomeTypeList[i], iconName: incomeTypeList[i],type});
+                        }
+                    }
+
+
+
             }
 
-            state.firstFetch = false;
         },
-        saveTags(state) {
-            window.localStorage.setItem('consumeTagList', JSON.stringify(state.consumeTagList));
+        saveTags(state,type) {
+            if(type==='consume'){
+                window.localStorage.setItem('consumeTagList', JSON.stringify(state.consumeTagList));
+            }else{
+                window.localStorage.setItem('incomeTagList',JSON.stringify(state.incomeTagList));
+            }
+
         },
         removeTag(state, id) {
 
@@ -88,8 +105,8 @@ const store = new Vuex.Store({
                 }
             }
         },
-        createTag(state, payload:{name:string,iconName:string}) {
-            const {name,iconName} = payload;
+        createTag(state, payload:{name:string,iconName:string,type:string}) {
+            const {name,iconName,type} = payload;
             state.createTagError = null;
             const names = state.consumeTagList.map(tag => tag.name);
             if (names.indexOf(name) >= 0) {
@@ -98,8 +115,14 @@ const store = new Vuex.Store({
             }
 
             const id = createId().toString();
-            state.consumeTagList.push({id, name: name,iconName:iconName});
-            store.commit('saveTags');
+            if(type==='consume'){
+                state.consumeTagList.push({id, name: name,iconName:iconName});
+            }
+            else{
+                state.incomeTagList.push({id, name: name,iconName:iconName});
+            }
+
+            store.commit('saveTags',type);
 
         },
         setCurrentTag(state, id: string) {
