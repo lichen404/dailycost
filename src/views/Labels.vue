@@ -32,7 +32,7 @@
     })
     export default class Labels extends Vue {
         beforeCreate() {
-            this.$store.commit('fetchTags');
+            this.$store.commit('fetchTags','consume');
         }
 
 
