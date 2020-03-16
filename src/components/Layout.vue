@@ -10,7 +10,7 @@
         <div v-if="displayQRcode()" class="mask">
             <span class="tips">温馨提示</span>
             <div class="img-wrapper">
-                <img src="/QRcode.png" alt="scan me">
+                <img src="QRcode.png" alt="scan me">
             </div>
 
             <span class="scanCode">请使用手机扫描二维码</span>
