@@ -17,6 +17,7 @@ type Tag = {
     id: string;
     name: string;
     iconName:string;
+    type: 'consume' | 'income'
 }
 
 type RootState = {

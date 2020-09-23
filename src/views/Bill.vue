@@ -7,17 +7,18 @@
             <!--            <Tabs :data-source="intervalList" :value.sync="interval" class-prefix="interval"/>-->
             <ol>
                 <li v-for="(group,index) in result" :key="index">
-                    <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
-                    <ol>
-                         <router-link :to="{path:'/records/',query:{index,type}}" v-for="(item,index) in group.items" :key="index">
-                             <li  class="record">
-                            <div class="tag">
-                                <Icon :name="item.tags[0].iconName" class="icon"/>
-                                <span>{{tagString(item.tags)}}</span>
-                            </div>
+                  <h3 class="title">{{ beautify(group.title) }}<span>￥{{ group.total }}</span></h3>
+                  <ol>
+                    <router-link :to="{path:'/records/',query:{index,type}}" v-for="(item,index) in group.items"
+                                 :key="index">
+                      <li class="record">
+                        <div class="tag">
+                          <Icon :name="item.tags[0].iconName" class="icon"/>
+                          <span>{{ tagString(item.tags) }}</span>
+                        </div>
 
 
-                            <span>￥{{item.amount}} </span>
+                        <span>￥{{item.amount}} </span>
                              </li>
                         </router-link>
 
@@ -171,11 +172,11 @@
             background-color: #c4c4c4;
 
             &.selected {
-                background-color: white;
+              background-color: #767676;
 
-                &::after {
-                    display: none;
-                }
+              &::after {
+                display: none;
+              }
             }
 
         }

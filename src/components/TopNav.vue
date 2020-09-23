@@ -1,6 +1,6 @@
 <template>
     <div class="navBar">
-        <Icon class="leftIcon" name="left" @click.native="goBack"/>
+        <Icon class="leftIcon" name="left" @click.native="handleClick"/>
         <span class="title"><slot></slot></span>
     </div>
 </template>
@@ -10,11 +10,11 @@
     import {Component} from 'vue-property-decorator';
     @Component
     export default class TopNav extends Vue{
-        goBack(){
+      handleClick() {
 
-            this.$router.back();
+        this.$emit('handleBack')
 
-        }
+      }
     }
 </script>
 

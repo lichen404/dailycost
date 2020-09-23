@@ -6,7 +6,8 @@ import Bill from '@/views/Bill.vue'
 import Notfound from '@/views/Notfound.vue'
 import EditLabel from '@/views/EditLabel.vue'
 import Record from "@/views/Record.vue";
-import Statistics from  "@/views/Statistics.vue"
+import Statistics from "@/views/Statistics.vue"
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -19,6 +20,7 @@ const routes = [
         path: '/money',
         component: Money
     },
+
     {
         path: '/labels',
         component: Labels

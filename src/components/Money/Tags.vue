@@ -6,17 +6,21 @@
                 <Icon :name="tag.iconName" :class="{selected:selectedTags.indexOf(tag)===0}"/>
                 <span>{{tag.name}}</span>
             </li>
-            <li class="item" @click="createTag">
-                <Icon name="add"/>
-                <span>新增</span>
+            <li class="item" @click="createTag('consume')">
+              <Icon name="add"/>
+              <span>新增</span>
             </li>
         </ul>
-        <ul class="current" v-else>
-            <li v-for="tag in incomeTagList" :key="tag.id"  @click="toggle(tag)" class="item">
-                <Icon :name="tag.iconName" :class="{selected:selectedTags.indexOf(tag)===0}"/>
-                <span>{{tag.name}}</span>
-            </li>
-        </ul>
+      <ul class="current" v-else>
+        <li v-for="tag in incomeTagList" :key="tag.id" @click="toggle(tag)" class="item">
+          <Icon :name="tag.iconName" :class="{selected:selectedTags.indexOf(tag)===0}"/>
+          <span>{{ tag.name }}</span>
+        </li>
+        <li class="item" @click="createTag('income')">
+          <Icon name="add"/>
+          <span>新增</span>
+        </li>
+      </ul>
 
 
 
@@ -47,10 +51,10 @@
         selectedTags:Tag[] =[];
 
 
-        created(){
+        created() {
 
-            this.$store.commit('fetchTags','consume');
-            this.$store.commit('fetchTags','income');
+          this.$store.commit('fetchTags');
+
 
         }
 

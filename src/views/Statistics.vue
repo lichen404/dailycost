@@ -1,6 +1,6 @@
 <template>
     <layout>
-        <TopNav>本月支出统计</TopNav>
+        <TopNav @handleBack="$router.back()">本月支出统计</TopNav>
         <div >
             <div class="title">每日支出</div>
             <v-chart    class="v-chart"  :options="bar" ></v-chart>
@@ -18,7 +18,6 @@
     import dayjs from "dayjs";
     import 'echarts/lib/chart/pie'
     import 'echarts/lib/chart/bar'
-    import clone from "@/lib/clone";
     import TopNav from "@/components/TopNav";
     export default {
         components:{
@@ -161,8 +160,8 @@
 
                 const typeList=[];
                 const result =[];
-                const recordList = this.$store.state.recordList;
-                const newList=clone(recordList).filter(r=>r.type===type);
+              const recordList = this.$store.state.recordList;
+              const newList = recordList.filter(r => r.type === type);
                 for(let i=0;i<newList.length;i++) {
                     let current = newList.filter(item=>item.tags[0].name===newList[i].tags[0].name);
                     if(!typeList.find((i)=>JSON.stringify(i)===JSON.stringify(current))){
@@ -185,8 +184,8 @@
                 let amount=0;
                 let count =0;
                 const now = dayjs();
-                const recordList = this.$store.state.recordList;
-                const newList=clone(recordList).filter(r=>r.type===type);
+              const recordList = this.$store.state.recordList;
+              const newList = recordList.filter(r => r.type === type);
                 for(let i=0;i<newList.length;i++){
                     if(now.isSame(dayjs(newList[i].createAt),'month')){
                         amount+=newList[i].amount;
