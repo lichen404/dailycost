@@ -1,6 +1,6 @@
 <template>
     <layout>
-       <TopNav>账单详情</TopNav>
+       <TopNav @handleBack="$router.push({path:'/bill',query:{type}})">账单详情</TopNav>
 
         <div class="container">
             <div class="tag">

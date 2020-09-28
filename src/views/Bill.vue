@@ -50,26 +50,29 @@
         components: {Tabs}
     })
     export default class Bill extends Vue {
-        interval = 'day';
-        type = '-';
-        intervalList = intervalList;
-        recordTypeList = recordTypeList;
+      interval = 'day';
+      type = '-';
+      intervalList = intervalList;
+      recordTypeList = recordTypeList;
 
-        beforeCreate() {
-            store.commit('fetchRecords');
+      beforeCreate() {
+        store.commit('fetchRecords');
 
-        }
+      }
 
+      mounted() {
+        this.type = this.$route.query.type && this.$route.query.type.toString() || this.type
+      }
 
-        tagString(tags: Tag[]) {
-            return tags.length === 0 ? '无' : tags.map(tag => tag.name).join(',');
-        }
+      tagString(tags: Tag[]) {
+        return tags.length === 0 ? '无' : tags.map(tag => tag.name).join(',');
+      }
 
-        beautify(string: string) {
-            const now = dayjs();
-            const api = dayjs(string);
-            if (api.isSame(now, 'day')) {
-                return '今天';
+      beautify(string: string) {
+        const now = dayjs();
+        const api = dayjs(string);
+        if (api.isSame(now, 'day')) {
+          return '今天';
 
             } else if (api.isSame(now.subtract(1, 'day'), 'day')) {
                 return '昨天';
