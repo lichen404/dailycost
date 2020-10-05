@@ -48,7 +48,10 @@ import recordTypeList from '@/constant/recordTypeList'
   }
 
   created() {
-    this.type = this.$route.query.type === 'consume' ? '-' : '+'
+      if(this.$route.query.type){
+          this.type = this.$route.query.type === 'consume' ? '-' : '+'
+      }
+
   }
 
 
