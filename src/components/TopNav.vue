@@ -5,17 +5,18 @@
     </div>
 </template>
 
-<script>
-    import Vue from 'vue';
-    import {Component} from 'vue-property-decorator';
-    @Component
-    export default class TopNav extends Vue{
-      handleClick() {
+<script lang="ts">
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 
-        this.$emit('handleBack')
+@Component
+export default class TopNav extends Vue {
+  handleClick() {
 
-      }
-    }
+    this.$emit('handleBack')
+
+  }
+}
 </script>
 
 <style lang="scss" scoped>

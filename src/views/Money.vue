@@ -107,13 +107,19 @@
 </script>
 <style lang="scss">
     .xxx-content {
-        //xxx是前缀，传给layout
-        display: flex;
-        flex-direction: column-reverse;
+      //xxx是前缀，传给layout
+      display: flex;
+      flex-direction: column-reverse;
     }
-    .notes{
-        padding: 12px 0;
+
+    .notes {
+      padding: 12px 0;
     }
+
+    .createdAt {
+      padding: 0 0 5px;
+    }
+
 
 </style>
 
