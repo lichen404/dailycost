@@ -3,7 +3,7 @@
 
     <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type"/>
     <div>
-
+      <span class="tooltip">提示：图表只能展示最近30天的数据</span>
       <div class="v-chart-wrapper" ref="wrapper">
         <v-chart class="v-chart" :options="type==='-'?getOption('-'):getOption('+')"></v-chart>
       </div>
@@ -133,6 +133,13 @@ export default class Statistics extends Vue {
 .title {
   margin-top: 10px;
   text-align: center;
+}
+
+.tooltip {
+  color: #c4c4c4;
+  font-size: 12px;
+  margin: 15px 0 0 10px;
+  display: inline-block;
 }
 
 .v-chart {
