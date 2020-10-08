@@ -1,34 +1,53 @@
 <template>
   <layout>
-    <TopNav @handleBack="$router.back()">本月支出统计</TopNav>
+
+    <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type"/>
     <div>
-      <div class="title">每日支出</div>
-      <v-chart class="v-chart" :options="option"></v-chart>
+
+      <div class="v-chart-wrapper" ref="wrapper">
+        <v-chart class="v-chart" :options="type==='-'?getOption('-'):getOption('+')"></v-chart>
+      </div>
     </div>
   </layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-
 import Chart from '@/components/Chart.vue';
 import dayjs from "dayjs";
 import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/line'
 import store from "@/store";
-import TopNav from '@/components/TopNav.vue';
+
 import {Component} from "vue-property-decorator";
+import recordTypeList from '@/constant/recordTypeList';
+import Tabs from "@/components/Tabs.vue";
 
 @Component({
-  components: {TopNav, 'v-chart': Chart}
+  components: {'v-chart': Chart, Tabs}
 })
 export default class Statistics extends Vue {
+  recordTypeList = recordTypeList
+  type = '-'
 
-  get option() {
+  getOption(type: '-' | '+') {
     return {
+      grid: {
+        left: 10,
+        right: 10,
+      },
       xAxis: {
         type: 'category',
-        data: this.days('day', '-')
+        data: this.getXDataOrYData('day', type),
+        axisTick: {
+          alignWithLabel: true
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#666'
+          }
+        }
+
       },
       yAxis: {
         type: 'value',
@@ -36,16 +55,20 @@ export default class Statistics extends Vue {
       },
       tooltip: {
         show: true,
-        triggerOn: 'click'
+        triggerOn: 'click',
+        position: 'top',
+        formatter: '{c}元'
       },
       series: [{
-        data: this.days('amounts', '-'),
-        type: 'line',
-        showBackground: true,
-        backgroundStyle: {
-          color: 'rgba(220, 220, 220, 0.8)'
+        symbol: 'circle',
+        symbolSize: 12,
+        itemStyle: {
+          borderWidth: 1,
+          color: '#666',
+          borderColor: '#666'
         },
-
+        data: this.getXDataOrYData('amounts', type),
+        type: 'line'
       },]
     }
   }
@@ -54,54 +77,47 @@ export default class Statistics extends Vue {
     store.commit('fetchRecords');
   }
 
-  beforeMount() {
-    if (store.state.recordList.length === 0) {
-      window.alert('还没有内容，先去记一笔账吧');
-      this.$router.push("/money")
-    }
 
+  mounted() {
+    const div = this.$refs.wrapper as HTMLDivElement
+    div.scrollLeft = div.scrollWidth
   }
 
 
+  // 展示最近30天的数据
   getDays() {
-    const [year, month] = [dayjs().year(), dayjs().month()];
-    const d = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    if ((year % 4 === 0 && year % 100 !== 0) || (year % 100 === 0 && year % 400 === 0)) {
-      if (month === 1) {
-        return 29;
-      } else {
-        return d[month];
-      }
-    } else {
-      return d[month];
+    const today = new Date();
+    const days = []
+    for (let i = 0; i <= 29; i++) {
+      days.push(dayjs(today).subtract(i, 'day'))
     }
+    return days
   }
 
-  days(name: string, type: string) {
-    const day = [];
+  getXDataOrYData(name: string, type: string) {
+    const xData = [];
     const days = this.getDays();
     const amounts = [];
-    let amount = null;
-    for (let i = 1; i <= days; i++) {
-      const date = dayjs().date(i);
+    let amount = 0;
+    for (let i = 0; i <= days.length - 1; i++) {
+      const date = days[i]
       for (let j = 0; j < this.$store.state.recordList.length; j++) {
         if (dayjs(this.$store.state.recordList[j].createAt).isSame(date, 'day')) {
           if (this.$store.state.recordList[j].type === type) {
             amount += this.$store.state.recordList[j].amount;
           }
-
         }
       }
-      day.push(i);
+      xData.push(date.format('MM-DD'));
       amounts.push(amount);
-      amount = null;
+      amount = 0;
     }
 
     if (name === 'day') {
-      return day;
+      return xData.reverse();
     }
     if (name === 'amounts') {
-      return amounts;
+      return amounts.reverse();
     }
   }
 }
@@ -120,6 +136,33 @@ export default class Statistics extends Vue {
 }
 
 .v-chart {
-  width: 500%;
+  width: 430%;
+
+  &-wrapper {
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+::v-deep {
+  .type-tabs-item {
+    background-color: #c4c4c4;
+
+    &.selected {
+      background-color: #767676;
+
+      &::after {
+        display: none;
+      }
+    }
+
+  }
+
+  .interval-tabs-item {
+    height: 48px;
+  }
 }
 </style>

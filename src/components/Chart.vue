@@ -1,20 +1,27 @@
 <template>
   <div class="wrapper" ref="wrapper">
-
   </div>
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import echarts, {EChartOption} from 'echarts';
-import {Component, Prop} from "vue-property-decorator";
+import echarts, {EChartOption, ECharts} from 'echarts';
+import {Component, Prop, Watch} from "vue-property-decorator";
 
 @Component
 export default class Chart extends Vue {
-  @Prop() options: EChartOption
+  @Prop() options?: EChartOption;
+  chart?: ECharts;
 
   mounted() {
-    const chart = echarts.init(this.$refs.wrapper)
-    chart.setOption(this.options)
+    this.chart = echarts.init(this.$refs.wrapper as HTMLDivElement)
+    if (this.options) {
+      this.chart.setOption(this.options)
+    }
+  }
+
+  @Watch('options')
+  onOptionsChange(newValue: EChartOption) {
+    this.chart!.setOption(newValue)
   }
 }
 </script>
