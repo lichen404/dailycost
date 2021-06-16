@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <layout>
+
+<layout>
             <!--            <Types :value.sync="value" class-prefix="xxx"/>-->
             <Tabs :data-source="recordTypeList" :value.sync="type" class-prefix="type"/>
 
@@ -31,7 +31,7 @@
                 <span class="word">您还没有添加相关记录</span></div>
         </layout>
 
-    </div>
+
 </template>
 
 <script lang="ts">

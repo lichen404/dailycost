@@ -1,11 +1,5 @@
 <template>
-    <div>
-
-
         <router-view/>
-
-
-    </div>
 </template>
 <script lang="js">
     import store from "@/store/index2";

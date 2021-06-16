@@ -1,8 +1,7 @@
 <template>
-    <div>
 
 
-        <layout class-prefix="xxx">
+<layout class-prefix="xxx">
 
 
           <number-panel :value.sync="record.amount" @submit="saveRecord"/>
@@ -18,7 +17,6 @@
 
 
         </layout>
-    </div>
 
 
 </template>

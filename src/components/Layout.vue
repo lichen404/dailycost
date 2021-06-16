@@ -37,19 +37,18 @@
 <style lang="scss" scoped>
     .layout-wrapper {
 
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
 
 
     }
 
     .content {
 
-        flex-grow: 1;
-        overflow: scroll;
-        min-height:calc(100vh - 54px);
-
+      flex-grow: 1;
+      overflow: auto;
+      min-height: calc(100% - 54px);
     }
 
     .mask {

@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <layout>
+
+<layout>
             <Tabs :data-source="dataSource" :value.sync="type" class-prefix="type"></Tabs>
             <div class="tagList">
               <router-link :to="`/labels/edit/${tag.id}`" class="tag" v-for="tag in (type==='-'?consumeTags:incomeTags)"
@@ -13,7 +13,7 @@
             </div>
 
         </layout>
-    </div>
+
 </template>
 
 <script lang="ts">
